@@ -5,5 +5,9 @@ cache:
 jdk:
 - oraclejdk8
 sudo: required
+services:
+- docker
 script:
-- mvn clean package
+- docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+- mvn clean package docker:build
+- docker push kgabriels/greeting:latest
